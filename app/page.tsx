@@ -1,62 +1,149 @@
 import Image from "next/image";
 import { Grid } from "@mui/material";
 import PusherConnection from "@/components/PusherConnection";
+import Header from "@/components/Header";
+import CarouselBody from "@/components/CarouselBody";
+import GetQueueData from "@/api/GetQueueData";
+
+const dummyData = [
+  {
+    page_id: 1,
+    doctor_data: [
+      {
+        doctor_id: 1,
+        antrian: 4,
+        doctorImage: "/images/dr_layung.jpg",
+        poli: "POLI GIGI",
+        doctorName: "drg. Layung Sekar Prabarayi",
+      },
+      {
+        doctor_id: 2,
+        antrian: 1325,
+        doctorImage: "/images/dr_febriza.png",
+        poli: "POLI GIGI",
+        doctorName: "drg. Febriza",
+      },
+      {
+        doctor_id: 3,
+        antrian: 4,
+        doctorImage: "/images/dr_fajar.png",
+        poli: "POLI",
+        doctorName: "dr. Fajar",
+      },
+      {
+        doctor_id: 4,
+        antrian: 1325,
+        doctorImage: "/images/dr_taufik.jpg",
+        poli: "POLI OBSGYN",
+        doctorName: "dr. Taufik R Alkaff SpOG",
+      },
+    ],
+  },
+  {
+    page_id: 2,
+    doctor_data: [
+      {
+        doctor_id: 1,
+        antrian: 5,
+        doctorImage: "/images/dr_layung.jpg",
+        poli: "POLI GIGI",
+        doctorName: "drg. Layung Sekar Prabarayi",
+      },
+      {
+        doctor_id: 2,
+        antrian: 101,
+        doctorImage: "/images/dr_febriza.png",
+        poli: "POLI GIGI",
+        doctorName: "drg. Febriza",
+      },
+      {
+        doctor_id: 3,
+        antrian: 4,
+        doctorImage: "/images/dr_fajar.png",
+        poli: "POLI",
+        doctorName: "dr. Fajar",
+      },
+      {
+        doctor_id: 9,
+        antrian: 13,
+        doctorImage: "/images/dr_taufik.jpg",
+        poli: "POLI OBSGYN",
+        doctorName: "dr. Taufik R Alkaff SpOG",
+      },
+    ],
+  },
+  {
+    page_id: 3,
+    doctor_data: [
+      {
+        doctor_id: 1,
+        antrian: 17,
+        doctorImage: "/images/dr_layung.jpg",
+        poli: "POLI GIGI",
+        doctorName: "drg. Layung Sekar Prabarayi",
+      },
+      {
+        doctor_id: 2,
+        antrian: 6,
+        doctorImage: "/images/dr_febriza.png",
+        poli: "POLI GIGI",
+        doctorName: "drg. Febriza",
+      },
+      {
+        doctor_id: 3,
+        antrian: 1551,
+        doctorImage: "/images/dr_fajar.png",
+        poli: "POLI",
+        doctorName: "dr. Fajar",
+      },
+      {
+        doctor_id: 4,
+        antrian: 84,
+        doctorImage: "/images/dr_taufik.jpg",
+        poli: "POLI OBSGYN",
+        doctorName: "dr. Taufik R Alkaff SpOG",
+      },
+    ],
+  },
+  // {
+  //   id: 1,
+  //   antrian: 4,
+  //   doctorImage: "/images/dr_layung.jpg",
+  //   poli: "POLI GIGI",
+  //   doctorName: "drg. Layung Sekar Prabarayi",
+  // },
+  // {
+  //   id: 2,
+  //   antrian: 1325,
+  //   doctorImage: "/images/dr_febriza.png",
+  //   poli: "POLI GIGI",
+  //   doctorName: "drg. Febriza",
+  // },
+  // {
+  //   id: 3,
+  //   antrian: 4,
+  //   doctorImage: "/images/dr_fajar.png",
+  //   poli: "POLI",
+  //   doctorName: "dr. Fajar",
+  // },
+  // {
+  //   id: 4,
+  //   antrian: 1325,
+  //   doctorImage: "/images/dr_taufik.jpg",
+  //   poli: "POLI OBSGYN",
+  //   doctorName: "dr. Taufik R Alkaff SpOG",
+  // },
+];
 
 export default function Home() {
   return (
     <div className="relative h-screen">
-      <PusherConnection />
-      <div
-        className="w-full h-28"
-        style={{
-          background: "linear-gradient(to right, #009b4c, #00587a, #00c8d7)",
-        }}
-      >
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <div className="flex justify-start">
-              <div className="ml-4 mt-3">
-                <Image
-                  src="/images/logo-rsu-mipa.png"
-                  alt="Logo RSU Mipa"
-                  width={70}
-                  height={70}
-                />
-              </div>
-              <div className="ml-6 mt-6">
-                <div className="font-24 font-bold uppercase text-white">
-                  antrian pasien rsu mitra paramedika
-                </div>
-                <div className="font-14 text-white">Senin, 13 Mei 2024</div>
-              </div>
-            </div>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <div
-              className="absolute top-0 right-0 h-28 w-full"
-              style={{
-                opacity: 0.2,
-                backgroundImage: "url('images/rsu-mipa.jpg')",
-                backgroundSize: "cover",
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-              }}
-            ></div>
-            <div className="flex justify-end items-center h-full pr-8">
-              <div className="font-24">
-                <Image
-                  src="/images/logo-kars.png"
-                  alt="Logo Kars"
-                  width={100}
-                  height={300}
-                  className="z-10"
-                />
-              </div>
-            </div>
-          </Grid>
-        </Grid>
+      <Header />
+      <div className="w-full mt-4">
+        <CarouselBody data={dummyData} />
+        <GetQueueData />
       </div>
-      <div className="w-full">
+      {/* <div className="w-full">
         <Grid container spacing={2}>
           <Grid item xs={12} md={6} className="relative">
             <div className="absolute w-2/5 h-56 right-4 top-4 mt-2 bg-white p-2 border-2 rounded-xl border-green-400">
@@ -65,43 +152,11 @@ export default function Home() {
                   no. antrian
                 </div>
               </div>
-              {/* <Grid container spacing={1}>
-                <Grid item xs={12} md={6}>
-                  <div className="flex justify-center">
-                    <div className="text-sm md:text-base lg:text-lg font-bold uppercase text-orange-400">
-                      ulang
-                    </div>
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <div className="flex justify-center">
-                    <div className="text-sm md:text-base lg:text-lg font-bold uppercase text-green-700">
-                      terakhir
-                    </div>
-                  </div>
-                </Grid>
-              </Grid> */}
               <div className="h-44 flex justify-center items-center">
                 <div className="font-bold text-4xl md:text-6xl lg:text-8xl text-green-600">
                   4
                 </div>
               </div>
-              {/* <div className="h-44 flex items-center">
-                <Grid container spacing={1}>
-                  <Grid item xs={12} md={6}>
-                    <div className="flex justify-center">
-                      <div className="font-bold text-xl md:text-3xl lg:text-6xl text-green-600"></div>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <div className="flex justify-center">
-                      <div className="font-bold text-xl md:text-3xl lg:text-6xl text-green-600">
-                        4
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div> */}
             </div>
             <div className="mx-4 my-4 h-52 flex items-center border-2 rounded-xl border-green-400">
               <Grid container spacing={1}>
@@ -135,43 +190,11 @@ export default function Home() {
                   no. antrian
                 </div>
               </div>
-              {/* <Grid container spacing={1}>
-                <Grid item xs={12} md={6}>
-                  <div className="flex justify-center">
-                    <div className="text-sm md:text-base lg:text-lg font-bold uppercase text-orange-400">
-                      ulang
-                    </div>
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <div className="flex justify-center">
-                    <div className="text-sm md:text-base lg:text-lg font-bold uppercase text-green-700">
-                      terakhir
-                    </div>
-                  </div>
-                </Grid>
-              </Grid> */}
               <div className="h-44 flex justify-center items-center">
                 <div className="font-bold text-4xl md:text-6xl lg:text-8xl text-green-600">
                   1325
                 </div>
               </div>
-              {/* <div className="h-44 flex items-center">
-                <Grid container spacing={1}>
-                  <Grid item xs={12} md={6}>
-                    <div className="flex justify-center">
-                      <div className="font-bold text-xl md:text-3xl lg:text-6xl text-green-600"></div>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <div className="flex justify-center">
-                      <div className="font-bold text-xl md:text-3xl lg:text-6xl text-green-600">
-                        132
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div> */}
             </div>
             <div className="mx-4 my-4 h-52 flex items-center border-2 rounded-xl border-green-400">
               <Grid container spacing={1}>
@@ -208,43 +231,11 @@ export default function Home() {
                   no. antrian
                 </div>
               </div>
-              {/* <Grid container spacing={1}>
-                <Grid item xs={12} md={6}>
-                  <div className="flex justify-center">
-                    <div className="text-sm md:text-base lg:text-lg font-bold uppercase text-orange-400">
-                      ulang
-                    </div>
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <div className="flex justify-center">
-                    <div className="text-sm md:text-base lg:text-lg font-bold uppercase text-green-700">
-                      terakhir
-                    </div>
-                  </div>
-                </Grid>
-              </Grid> */}
               <div className="h-44 flex justify-center items-center">
                 <div className="font-bold text-4xl md:text-6xl lg:text-8xl text-green-600">
                   4
                 </div>
               </div>
-              {/* <div className="h-44 flex items-center">
-                <Grid container spacing={1}>
-                  <Grid item xs={12} md={6}>
-                    <div className="flex justify-center">
-                      <div className="font-bold text-xl md:text-3xl lg:text-6xl text-green-600"></div>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <div className="flex justify-center">
-                      <div className="font-bold text-xl md:text-3xl lg:text-6xl text-green-600">
-                        4
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div> */}
             </div>
             <div className="mx-4 mt-10 h-52 flex items-center border-2 rounded-xl border-green-400">
               <Grid container spacing={1}>
@@ -278,43 +269,11 @@ export default function Home() {
                   no. antrian
                 </div>
               </div>
-              {/* <Grid container spacing={1}>
-                <Grid item xs={12} md={6}>
-                  <div className="flex justify-center">
-                    <div className="text-sm md:text-base lg:text-lg font-bold uppercase text-orange-400">
-                      ulang
-                    </div>
-                  </div>
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <div className="flex justify-center">
-                    <div className="text-sm md:text-base lg:text-lg font-bold uppercase text-green-700">
-                      terakhir
-                    </div>
-                  </div>
-                </Grid>
-              </Grid> */}
               <div className="h-44 flex justify-center items-center">
                 <div className="font-bold text-4xl md:text-6xl lg:text-8xl text-green-600">
                   1325
                 </div>
               </div>
-              {/* <div className="h-44 flex items-center">
-                <Grid container spacing={1}>
-                  <Grid item xs={12} md={6}>
-                    <div className="flex justify-center">
-                      <div className="font-bold text-xl md:text-3xl lg:text-6xl text-green-600"></div>
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <div className="flex justify-center">
-                      <div className="font-bold text-xl md:text-3xl lg:text-6xl text-green-600">
-                        132
-                      </div>
-                    </div>
-                  </Grid>
-                </Grid>
-              </div> */}
             </div>
             <div className="mx-4 mt-10 h-52 flex items-center border-2 rounded-xl border-green-400">
             <Grid container spacing={1}>
@@ -342,7 +301,7 @@ export default function Home() {
             </div>
           </Grid>
         </Grid>
-      </div>
+      </div> */}
     </div>
     // <main className="flex min-h-screen flex-col items-center justify-between p-24">
     //   <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">

@@ -2,8 +2,13 @@
 
 import { useEffect } from "react";
 import Pusher from "pusher-js";
+import { QueueData } from "@/model/QueueData";
 
-const PusherConnection: React.FC = () => {
+interface PusherConnectionProps {
+    onQueueUpdate: (data: QueueData[]) => void;
+}
+
+const PusherConnection: React.FC<PusherConnectionProps> = ({ onQueueUpdate }) => {
     useEffect(() => {
         const pusher = new Pusher('12345', {
             cluster: 'mt1',
@@ -11,15 +16,15 @@ const PusherConnection: React.FC = () => {
 
         const channel = pusher.subscribe('antrian-channel');
 
-        channel.bind('antrian-event', (data: any) => {
-            console.log('Received data:', data);
+        channel.bind('antrian-update', (data: QueueData[]) => {
+            onQueueUpdate(data);
         });
 
         return () => {
             channel.unbind();
             pusher.unsubscribe('antrian-channel');
         };
-    }, []);
+    }, [onQueueUpdate]);
 
     return null;
 }
